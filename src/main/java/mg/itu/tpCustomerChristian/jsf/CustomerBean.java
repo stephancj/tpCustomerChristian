@@ -15,7 +15,7 @@ import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;  
 import java.io.Serializable;  
 import java.util.List;  
-import mg.itu.tpCustomerChistian.entities.Customer;
+import mg.itu.tpCustomerChristian.entities.Customer;
 
 import mg.itu.tpCustomerChristian.ejb.CustomerManager;
 

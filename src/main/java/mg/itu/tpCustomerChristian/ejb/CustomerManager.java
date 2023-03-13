@@ -15,7 +15,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import java.util.List;
-import mg.itu.tpCustomerChistian.entities.Customer;
+import mg.itu.tpCustomerChristian.entities.Customer;
 
 @Stateless
 public class CustomerManager {
@@ -30,7 +30,11 @@ public class CustomerManager {
     public Customer update(Customer customer) {
        return em.merge(customer);
     }
-
+    
+    public Customer findById(int idCustomer) {  
+       return em.find(Customer.class, idCustomer);  
+    }
+    
     public void persist(Customer customer) {
        em.persist(customer);
     }
