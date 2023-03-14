@@ -13,7 +13,10 @@ import java.io.Serializable;
 import jakarta.ejb.EJB;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
+import java.util.List;
 import mg.itu.tpCustomerChristian.ejb.CustomerManager;
+import mg.itu.tpCustomerChristian.ejb.DiscountManager;
+import mg.itu.tpCustomerChristian.entities.Discount;
 
 /**
  * Backing bean pour la page customerDetails.xhtml.
@@ -23,9 +26,12 @@ import mg.itu.tpCustomerChristian.ejb.CustomerManager;
 public class CustomerDetailsBean implements Serializable {
   private int idCustomer;
   private Customer customer;
+  private List<Discount> discounts; 
 
   @EJB
   private CustomerManager customerManager;
+  @EJB
+  private DiscountManager discountManager;
 
 
   public int getIdCustomer() {
@@ -40,6 +46,7 @@ public class CustomerDetailsBean implements Serializable {
   /**
    * Retourne les détails du client courant (contenu dans l'attribut customer de
    * cette classe).
+     * @return 
    */
     public Customer getCustomer() {
       return customer;
@@ -59,5 +66,16 @@ public class CustomerDetailsBean implements Serializable {
 
   public void loadCustomer() {
     this.customer = customerManager.findById(idCustomer);
+  }
+  
+  /**
+   * Retourne la liste de tous les Discount.
+     * @return 
+   */
+  public List<Discount> getDiscounts() {
+      if (discounts == null) {
+      discounts = discountManager.getAllDiscounts();
+    }
+    return discounts;
   }
 }
