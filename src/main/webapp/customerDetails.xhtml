@@ -12,7 +12,8 @@
         <title>Customer Details</title>
     </h:head>
     <h:body>
-        <h:form>
+        <h:outputText value="Aucun client avec l'id #{customerDetailsBean.idCustomer} !" rendered='#{customerDetailsBean.customer == null}'/>
+        <h:form rendered='#{customerDetailsBean.customer != null}'>
         <h1><h:outputText value="Create/Edit"/></h1>
         <h:panelGrid columns="2">
             <h:outputLabel value="CustomerId:" for="customerId" />
@@ -38,16 +39,19 @@
             <h:outputLabel value="Discount:" for="discount" />
             <h:selectOneMenu 
                 id="discount" value="#{customerDetailsBean.customer.discount}" 
-                title="Discount" required="true" requiredMessage="The Discount field is required.">
+                title="Discount" 
+                required="true" 
+                requiredMessage="The Discount field is required."
+                converter="discountConverter">
                 <f:selectItems value="#{customerDetailsBean.discounts}"
                                var="discount"
-                               itemLabel="#{discount.code} : #{discount.rate}" 
-                               itemValue="#{discount}"/>
+                               itemLabel="#{discount.code} : #{discount.rate}%" 
+                               itemValue="#{item}"/>
             </h:selectOneMenu>
-            <h:button id="back" value="Revenir à la liste" outcome="customerList"/>
                 <h:commandButton id="update" value="Enregistrer" action="#{customerDetailsBean.update}"/>
         </h:panelGrid>
         <h:messages/>
      </h:form>
+        <br/><h:button id="back" value="Revenir à la liste" outcome="customerList"/>
     </h:body>
 </html>
