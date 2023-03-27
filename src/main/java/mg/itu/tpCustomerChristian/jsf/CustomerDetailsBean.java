@@ -24,58 +24,61 @@ import mg.itu.tpCustomerChristian.entities.Discount;
 @Named
 @ViewScoped
 public class CustomerDetailsBean implements Serializable {
-  private int idCustomer;
-  private Customer customer;
-  private List<Discount> discounts; 
 
-  @EJB
-  private CustomerManager customerManager;
-  @EJB
-  private DiscountManager discountManager;
+    private int idCustomer;
+    private Customer customer;
+    private List<Discount> discounts;
 
+    @EJB
+    private CustomerManager customerManager;
+    @EJB
+    private DiscountManager discountManager;
 
-  public int getIdCustomer() {
-    return idCustomer;
-  }
-  
+    public int getIdCustomer() {
+        return idCustomer;
+    }
 
-  public void setIdCustomer(int idCustomer) {
-    this.idCustomer = idCustomer;
-  }
+    public void setIdCustomer(int idCustomer) {
+        this.idCustomer = idCustomer;
+    }
 
-  /**
-   * Retourne les détails du client courant (contenu dans l'attribut customer de
-   * cette classe).
-     * @return 
-   */
+    /**
+     * Retourne les détails du client courant (contenu dans l'attribut customer
+     * de cette classe).
+     *
+     * @return
+     */
     public Customer getCustomer() {
-      return customer;
+        return customer;
     }
 
-  /**
-   * Action handler - met à jour dans la base de données les données du client
-   * contenu dans la variable d'instance customer.
-   * @return la prochaine page à afficher, celle qui affiche la liste des clients.
-   */
-  public String update() {
-    // Modifie la base de données.
-    // Il faut affecter à customer (sera expliqué dans le cours).
-    customer = customerManager.update(customer);
-    return "customerList";
-  }
-
-  public void loadCustomer() {
-    this.customer = customerManager.findById(idCustomer);
-  }
-  
-  /**
-   * Retourne la liste de tous les Discount.
-     * @return 
-   */
-  public List<Discount> getDiscounts() {
-      if (discounts == null) {
-      discounts = discountManager.getAllDiscounts();
+    /**
+     * Action handler - met à jour dans la base de données les données du client
+     * contenu dans la variable d'instance customer.
+     *
+     * @return la prochaine page à afficher, celle qui affiche la liste des
+     * clients.
+     */
+    public String update() {
+        // Modifie la base de données.
+        // Il faut affecter à customer (sera expliqué dans le cours).
+        customer = customerManager.update(customer);
+        return "customerList";
     }
-    return discounts;
-  }
+
+    public void loadCustomer() {
+        this.customer = customerManager.findById(idCustomer);
+    }
+
+    /**
+     * Retourne la liste de tous les Discount.
+     *
+     * @return
+     */
+    public List<Discount> getDiscounts() {
+        if (discounts == null) {
+            discounts = discountManager.getAllDiscounts();
+        }
+        return discounts;
+    }
 }
